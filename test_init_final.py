@@ -704,8 +704,6 @@ async def dbSave():
 			if timestring == bossTime[i]:
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
-						if len(bossData[i][6]) != 0:
-							bossData[i][6] = "```diff\n" + bossData[i][6] + "\n```"
 						if bossData[i][2] == '0' :
 							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 						else : 
@@ -1123,7 +1121,7 @@ while True:
 					)
 			embed.add_field(
 					name="----- 추가기능 -----",
-					value= '```- [보스명]킬/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]킬 명령어는 초성으로 입력가능합니다.\n  ex)기감킬 => ㄱㄱㅋ, 기감 킬 => ㄱㄱ ㅋ```'
+					value= '```- [보스명]킬/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]킬 명령어는 초성으로 입력가능합니다.\n ```'
 					)
 			await ctx.send( embed=embed, tts=False)
 		else:
@@ -1876,9 +1874,6 @@ while True:
 					cnt += 1
 				for i in range(len(ouput_bossData)):
 					if timestring == ouput_bossData[i][1]:
-						if len(ouput_bossData[i][6]) != 0:
-							ouput_bossData[i][6] = "```diff\n" + ouput_bossData[i][6] + "\n```"
-							
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + '\n ' + ouput_bossData[i][6] + '\n'
@@ -2738,7 +2733,7 @@ while True:
 
 					if message.content.startswith('!메모 ' + bossData[i][0] +' '):
 						
-						tmp_msg ='! 메모' + bossData[i][0] +' '
+						tmp_msg ='! 메모' + "```diff\n" + bossData[i][0] +"\n```"
 						
 						bossData[i][6] = hello[len(tmp_msg):]
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
