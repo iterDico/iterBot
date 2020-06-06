@@ -1098,9 +1098,9 @@ while True:
 			command_list += ','.join(command[17]) + '\n'     #!리젠
 			command_list += ','.join(command[18]) + '\n'     #!현재시간
 			command_list += ','.join(command[24]) + '\n'     #!킬초기화
-			command_list += ','.join(command[25]) + '\n'     #!킬횟수 확인
-			command_list += ','.join(command[25]) + ' [아이디]\n'     #!킬
-			command_list += ','.join(command[26]) + ' [아이디]\n'     #!킬삭제
+			#command_list += ','.join(command[25]) + '\n'     #!킬횟수 확인
+			#command_list += ','.join(command[25]) + ' [아이디]\n'     #!킬
+			#command_list += ','.join(command[26]) + ' [아이디]\n'     #!킬삭제
 			command_list += ','.join(command[19]) + '\n'     #!공지
 			command_list += ','.join(command[19]) + ' [공지내용]\n'     #!공지
 			command_list += ','.join(command[20]) + '\n'     #!공지삭제
@@ -1849,8 +1849,8 @@ while True:
 						aa.append('+')	                                 #output_bossData[3] : +
 					aa.append(bossData[i][2])                            #output_bossData[4] : 멍/미입력 보스
 					aa.append(bossMungCnt[i])	                         #output_bossData[5] : 멍/미입력횟수
-					aa.append(bossData[i][6])	                         #output_bossData[6] : 메세지
-					ouput_bossData.append(aa)
+					aa.append(bossData[i][6])+'\n'                       #output_bossData[6] : 메세지
+					'---->'+ouput_bossData.append(aa)
 					aa = []
 
 			for i in range(fixed_bossNum):
@@ -1859,8 +1859,8 @@ while True:
 				aa.append(fixed_bossTime[i].strftime('%H:%M:%S'))    #output_bossData[2] : 시간(00:00:00) -> 초빼기 : aa.append(fixed_bossTime[i].strftime('%H:%M'))
 				aa.append('@')                                       #output_bossData[3] : @
 				aa.append(0)                                         #output_bossData[4] : 멍/미입력 보스
-				aa.append(0)                                         #output_bossData[5] : 멍/미입력횟수
-				aa.append("")                                        #output_bossData[6] : 메세지
+				aa.append(0)'\n'                                     #output_bossData[5] : 멍/미입력횟수
+				'---->'+aa.append("")                                        #output_bossData[6] : 메세지
 				ouput_bossData.append(aa)
 				aa = []
 
@@ -2734,9 +2734,14 @@ while True:
 					if message.content.startswith('!메모 ' + bossData[i][0] +' '):
 						
 						tmp_msg ='! 메모' + bossData[i][0] +' '
-						
+
 						bossData[i][6] = hello[len(tmp_msg):]
-						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
+
+						embed = discord.Embed(
+							description= bossData[i][6] ,
+							color=0x00ff00
+						)
+						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + embed=embed, tts=False + ' ] 메모등록 완료>', tts=False)
 						
 					if message.content.startswith('!메모삭제 '+ bossData[i][0]):
 						
