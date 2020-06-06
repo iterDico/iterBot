@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*- 
 
-################ Server V16.4 #####################
+################ Server V16.5 #####################
 
 import os
 import sys
@@ -72,7 +72,7 @@ FixedBossDateData = []
 indexFixedBossname = []
 
 client = discord.Client()
-client = commands.Bot(command_prefix="", help_command = None, description='일상디코봇')
+client = commands.Bot(command_prefix="", help_command = None, description='iter디코봇')
 
 access_token = os.environ["BOT_TOKEN"]			
 git_access_token = os.environ["GIT_TOKEN"]			
@@ -643,9 +643,10 @@ async def task():
 
 #mp3 파일 생성함수(gTTS 이용, 남성목소리)
 async def MakeSound(saveSTR, filename):
-	'''
+	
 	tts = gTTS(saveSTR, lang = 'ko')
-	tts.save('./' + filename + '.mp3')
+	tts.save('./' + filename + '.wav')
+	
 	'''
 	try:
 		encText = urllib.parse.quote(saveSTR)
@@ -655,7 +656,7 @@ async def MakeSound(saveSTR, filename):
 		tts = gTTS(saveSTR, lang = 'ko')
 		tts.save('./' + filename + '.wav')
 		pass
-
+	'''
 #mp3 파일 재생함수	
 async def PlaySound(voiceclient, filename):
 	source = discord.FFmpegPCMAudio(filename)
@@ -1055,15 +1056,17 @@ while True:
 			if basicSetting[6] != "":
 				voice_client1 = await client.get_channel(basicSetting[6]).connect(reconnect=True)
 				print('< 음성채널 [' + client.get_channel(basicSetting[6]).name + '] 접속완료>')
-			if basicSetting[10] != "":
-				print('< 사다리채널 [' + client.get_channel(int(basicSetting[10])).name + '] 접속완료>')
-			if basicSetting[13] != "":
-				print('< 정산채널 [' + client.get_channel(int(basicSetting[13])).name + '] 접속완료>')
-			if basicSetting[20] != "":
-				print('< 척살채널 [' + client.get_channel(int(basicSetting[20])).name + '] 접속완료>')
-			if int(basicSetting[12]) != 0 :
+			if basicSetting[8] != "":
+				print('< 사다리채널 [' + client.get_channel(int(basicSetting[8])).name + '] 접속완료>')
+			if basicSetting[11] != "":
+				print('< 정산채널 [' + client.get_channel(int(basicSetting[11])).name + '] 접속완료>')
+			if basicSetting[18] != "":
+				print('< 척살채널 [' + client.get_channel(int(basicSetting[18])).name + '] 접속완료>')
+			if basicSetting[19] != "":
+				print('< 경주채널 [' + client.get_channel(int(basicSetting[19])).name + '] 접속완료>')
+			if int(basicSetting[13]) != 0 :
 				print('< 보탐봇 재시작 시간 ' + endTime.strftime('%Y-%m-%d ') + endTime.strftime('%H:%M:%S') + ' >')
-				print('< 보탐봇 재시작 주기 ' + basicSetting[12] + '일 >')
+				print('< 보탐봇 재시작 주기 ' + basicSetting[13] + '일 >')
 			else :
 				print('< 보탐봇 재시작 설정안됨 >')
 
@@ -1105,8 +1108,8 @@ while True:
 			command_list += ','.join(command[28]) + ' 사다리, 정산, 척살, 경주\n\n'     #!채널설정
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
-			command_list += '[보스명]컷 또는 [보스명]컷 0000, 00:00\n'  
-			command_list += '[보스명] 컷 또는 [보스명] 컷 0000, 00:00\n'   
+			command_list += '[보스명]킬 또는 [보스명]킬 0000, 00:00\n'  
+			command_list += '[보스명] 킬 또는 [보스명] 킬 0000, 00:00\n'   
 			command_list += '[보스명]멍 또는 [보스명]멍 0000, 00:00\n'     
 			command_list += '[보스명]예상 또는 [보스명]예상 0000, 00:00\n' 
 			command_list += '[보스명]삭제\n'     
@@ -1118,7 +1121,7 @@ while True:
 					)
 			embed.add_field(
 					name="----- 추가기능 -----",
-					value= '```- [보스명]컷/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]컷 명령어는 초성으로 입력가능합니다.\n  ex)기감컷 => ㄱㄱㅋ, 기감 컷 => ㄱㄱ ㅋ```'
+					value= '```- [보스명]킬/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]킬 명령어는 초성으로 입력가능합니다.\n  ex)기감킬 => ㄱㄱㅋ, 기감 킬 => ㄱㄱ ㅋ```'
 					)
 			await ctx.send( embed=embed, tts=False)
 		else:
@@ -1129,7 +1132,7 @@ while True:
 	async def setting_(ctx):	
 		#print (ctx.message.channel.id)
 		if ctx.message.channel.id == basicSetting[7]:
-			setting_val = '보탐봇버전 : Server Ver. 16.4 (2020. 5. 22.)\n'
+			setting_val = '보탐봇버전 : Server Ver. 16.5 (2020. 6. 3.)\n'
 			setting_val += '음성채널 : ' + client.get_channel(basicSetting[6]).name + '\n'
 			setting_val += '텍스트채널 : ' + client.get_channel(basicSetting[7]).name +'\n'
 			if basicSetting[8] != "" :
@@ -2538,15 +2541,15 @@ while True:
 				hello = message.content
 
 				for i in range(bossNum):
-					################ 보스 컷처리 ################ 
-					if message.content.startswith(bossData[i][0] +'컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +'컷')) or message.content.startswith(bossData[i][0] +' 컷') or message.content.startswith(convertToInitialLetters(bossData[i][0] +' 컷')):
+					################ 보스 킬처리 ################ 
+					if message.content.startswith('킬' + bossData[i][0]) or message.content.startswith('킬' + convertToInitialLetters(bossData[i][0])) or message.content.startswith('킬 ' + bossData[i][0]) or message.content.startswith(convertToInitialLetters('킬 ' + bossData[i][0])):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'컷'
+						tmp_msg = bossData[i][0] +'킬'
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
@@ -2755,4 +2758,4 @@ while True:
 
 	print("Bot restarting")
 	client = discord.Client(loop=client.loop)
-	client = commands.Bot(command_prefix="", help_command = None, description='일상디코봇')
+	client = commands.Bot(command_prefix="", help_command = None, description='iter디코봇')
