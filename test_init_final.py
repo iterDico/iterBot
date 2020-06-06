@@ -2549,7 +2549,7 @@ while True:
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = '킬' + bossData[i][0]
+						tmp_msg = '!킬' + bossData[i][0]
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
