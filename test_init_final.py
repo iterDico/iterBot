@@ -705,6 +705,8 @@ async def dbSave():
 			if timestring == bossTime[i]:
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
+						if len(bossData[i][6]) != 0:
+							bossData[i][6] = "```diff\n" + bossData[i][6] + "\n```"
 						if bossData[i][2] == '0' :
 							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 						else : 
@@ -1877,8 +1879,7 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if len(ouput_bossData[i][6]) != 0:
 							ouput_bossData[i][6] = "```diff\n" + ouput_bossData[i][6] + "\n```"
-						else :
-							ouput_bossData[i][6] = '``` ```'
+							
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
 								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + '\n ' + ouput_bossData[i][6] + '\n'
@@ -1912,7 +1913,7 @@ while True:
 				#		value= tmp_boss_information[0],
 				#		inline = False
 				#		)				
-				await ctx.send( embed=embed, tts=False)
+				#await ctx.send( embed=embed, tts=False)
 			else : 
 				###########################일반보스출력
 				if len(boss_information[0]) != 0:
