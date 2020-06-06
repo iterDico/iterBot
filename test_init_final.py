@@ -1108,12 +1108,12 @@ while True:
 			##command_list += ','.join(command[28]) + ' 사다리, 정산, 척살, 경주\n\n'     #!채널설정
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
-			command_list += '[보스명]킬 또는 [보스명]킬 0000, 00:00\n'  
-			command_list += '[보스명] 킬 또는 [보스명] 킬 0000, 00:00\n'   
-			command_list += '[보스명]멍 또는 [보스명]멍 0000, 00:00\n'     
-			command_list += '[보스명]예상 또는 [보스명]예상 0000, 00:00\n' 
-			command_list += '[보스명]삭제\n'     
-			command_list += '[보스명]메모 [할말]\n'
+			command_list += '!킬 [보스명] 또는 !킬 [보스명] 0000, 00:00\n'  
+			command_list += '!킬 [보스명] 또는 !킬 [보스명] 0000, 00:00\n'   
+			command_list += '!멍 [보스명] 또는 !멍 [보스명] 0000, 00:00\n'     
+			command_list += '!예상 [보스명] 또는 !예상 [보스명] 0000, 00:00\n' 
+			command_list += '!삭제 [보스명]\n'     
+			command_list += '!메모 [보스명] [할말]\n'
 			embed = discord.Embed(
 					title = "----- 명령어 -----",
 					description= '```' + command_list + '```',
@@ -2669,14 +2669,14 @@ while True:
 						
 				################ 예상 보스 타임 입력 ################ 
 
-					if message.content.startswith(bossData[i][0] +'예상'):
+					if message.content.startswith('!예상 ' + bossData[i][0]):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'예상'
+						tmp_msg = '!예상 ' + bossData[i][0]
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
@@ -2714,7 +2714,7 @@ while True:
 							
 					################ 보스타임 삭제 ################
 						
-					if message.content == bossData[i][0] +'삭제':
+					if message.content == '!삭제 '+ bossData[i][0]:
 						bossTime[i] = datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						tmp_bossTime[i] =  datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0]))
 						bossTimeString[i] = '99:99:99'
@@ -2731,14 +2731,14 @@ while True:
 					
 					################ 보스별 메모 ################ 
 
-					if message.content.startswith(bossData[i][0] +'메모 '):
+					if message.content.startswith('!메모 ' + bossData[i][0] +' '):
 						
-						tmp_msg = bossData[i][0] +'메모 '
+						tmp_msg ='! 메모' + bossData[i][0] +' '
 						
 						bossData[i][6] = hello[len(tmp_msg):]
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
 						
-					if message.content.startswith(bossData[i][0] +'메모삭제'):
+					if message.content.startswith('!메모삭제 '+ bossData[i][0]):
 						
 						bossData[i][6] = ''
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' 메모삭제 완료>', tts=False)
