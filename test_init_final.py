@@ -1932,12 +1932,12 @@ while True:
 					else :
 						boss_information[i+1] = '``` ```'
 
-					embed = discord.Embed(
-							title = '',
-							description= boss_information[i+1],
-							color=0x0000ff
-							)
-					await ctx.send( embed=embed, tts=False)
+				#	embed = discord.Embed(
+				#			title = '',
+				#			description= boss_information[i+1],
+				#			color=0x0000ff
+				#			)
+				#	await ctx.send( embed=embed, tts=False)
 				###########################미예약보스출력
 				if len(tmp_boss_information[0]) != 0:
 					if len(tmp_boss_information) == 1 :
@@ -2071,7 +2071,7 @@ while True:
 			#		description= fixedboss_information[0],
 			#		color=0x0000ff
 			#		)
-			await ctx.send( embed=embed, tts=False)
+			#await ctx.send( embed=embed, tts=False)
 			for i in range(len(fixedboss_information)-1):
 				if len(fixedboss_information[i+1]) != 0:
 					fixedboss_information[i+1] = "```diff\n" + fixedboss_information[i+1] + "\n```"
@@ -2741,11 +2741,6 @@ while True:
 					if message.content.startswith('!메모 ' + bossData[i][0] +' '):
 						
 						tmp_msg ='! 메모' + bossData[i][0] +' '
-
-						embed = discord.Embed(
-							description= "```" + fixed_bossData[i][0] + fixed_bossData[i][4] + "```" ,
-							color=0x00ff00
-						)
 						
 						bossData[i][6] = hello[len(tmp_msg):]
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
