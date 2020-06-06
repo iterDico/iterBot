@@ -46,7 +46,6 @@ LoadChk = 0
 
 bossTime = []
 tmp_bossTime = []
-bef_bossTime = []
 
 fixed_bossTime = []
 
@@ -96,7 +95,6 @@ def init():
 
 	global bossTime
 	global tmp_bossTime
-	global bef_bossTime
 
 	global fixed_bossTime
 
@@ -425,7 +423,6 @@ async def task():
 
 	global bossTime
 	global tmp_bossTime
-	global bef_bossTime
 	
 	global fixed_bossTime
 
@@ -1346,7 +1343,6 @@ while True:
 
 		global bossTime
 		global tmp_bossTime
-		global bef_bossTime
 		global fixed_bossTime
 
 		global bossTimeString
@@ -1371,7 +1367,6 @@ while True:
 
 			bossTime = []
 			tmp_bossTime = []
-			bef_bossTime = []
 			fixed_bossTime = []
 
 			bossTimeString = []
@@ -1585,7 +1580,6 @@ while True:
 
 		global bossTime
 		global tmp_bossTime
-		global bef_bossTime
 
 		global fixed_bossTime
 
@@ -1639,8 +1633,7 @@ while True:
 					bossMungCnt[i] = bossMungCnt[i] - 1
 				else :
 					now2 = now2 + datetime.timedelta(hours = int(bossData[i][1]), minutes = int(bossData[i][5]))
-							
-				bef_bossTime[i] = tmp_now
+				
 				tmp_bossTime[i] = bossTime[i] = nextTime = now2
 				tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 				tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
@@ -2508,7 +2501,6 @@ while True:
 
 		global bossTime
 		global tmp_bossTime
-		global bef_bossTime
 
 		global fixed_bossTime
 
@@ -2600,7 +2592,6 @@ while True:
 						else :
 							now2 = now2 + datetime.timedelta(hours = int(bossData[i][1]), minutes = int(bossData[i][5]))
 
-						bef_bossTime[i] = tmp_now
 						tmp_bossTime[i] = bossTime[i] = nextTime = now2
 						tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 						tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
@@ -2649,7 +2640,6 @@ while True:
 									temptime = temptime + deltaTime
 									bossMungCnt[i] = bossMungCnt[i] + 1
 
-							bef_bossTime[i] = tmp_now
 							tmp_bossTime[i] = bossTime[i] = temptime				
 
 							tmp_bossTimeString[i] = bossTimeString[i] = temptime.strftime('%H:%M:%S')
@@ -2669,7 +2659,6 @@ while True:
 								bossMungFlag[i] = False
 								bossMungCnt[i] = bossMungCnt[i] + 1
 
-								bef_bossTime[i] = tmp_now
 								tmp_bossTime[i] = bossTime[i] = nextTime				
 
 								tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
@@ -2717,7 +2706,6 @@ while True:
 							if tmp_now < now2 :
 								tmp_now = tmp_now + datetime.timedelta(days=int(1))
 
-							bef_bossTime[i] = tmp_now
 							tmp_bossTime[i] = bossTime[i] = nextTime = tmp_now
 							tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 							tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
