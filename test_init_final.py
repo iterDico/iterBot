@@ -1913,7 +1913,7 @@ while True:
 				#		value= tmp_boss_information[0],
 				#		inline = False
 				#		)				
-				#await ctx.send( embed=embed, tts=False)
+				await ctx.send( embed=embed, tts=False)
 			else : 
 				###########################일반보스출력
 				if len(boss_information[0]) != 0:
