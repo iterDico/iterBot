@@ -2733,7 +2733,7 @@ while True:
 
 					if message.content.startswith('!메모 ' + bossData[i][0] +' '):
 						
-						tmp_msg ='! 메모' + "```tex\n--->" + bossData[i][0] +"\n```"
+						tmp_msg ='! 메모' + "```tex\n" + "---> "+bossData[i][0] +"\n```"
 						
 						bossData[i][6] = hello[len(tmp_msg):]
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
