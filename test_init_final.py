@@ -72,7 +72,7 @@ FixedBossDateData = []
 indexFixedBossname = []
 
 client = discord.Client()
-client = commands.Bot(command_prefix="", help_command = None, description='iter디코봇')
+client = commands.Bot(command_prefix="", help_command = None, description='일상디코봇')
 
 access_token = os.environ["BOT_TOKEN"]			
 git_access_token = os.environ["GIT_TOKEN"]			
@@ -1088,13 +1088,13 @@ while True:
 			command_list += ','.join(command[8]) + '\n'     #!명치
 			command_list += ','.join(command[9]) + '\n'     #!재시작
 			command_list += ','.join(command[10]) + '\n'     #!미예약
-			command_list += ','.join(command[11]) + ' [인원] [금액]\n'     #!분배
-			command_list += ','.join(command[12]) + ' [뽑을인원수] [아이디1] [아이디2]...\n'     #!사다리
-			command_list += ','.join(command[27]) + ' [아이디1] [아이디2]...(최대 12명)\n'     #!경주
-			command_list += ','.join(command[13]) + ' [아이디]\n'     #!정산
+			##command_list += ','.join(command[11]) + ' [인원] [금액]\n'     #!분배
+			##command_list += ','.join(command[12]) + ' [뽑을인원수] [아이디1] [아이디2]...\n'     #!사다리
+			##command_list += ','.join(command[27]) + ' [아이디1] [아이디2]...(최대 12명)\n'     #!경주
+			##command_list += ','.join(command[13]) + ' [아이디]\n'     #!정산
 			command_list += ','.join(command[14]) + ' 또는 ' + ','.join(command[14]) + ' 0000, 00:00\n'     #!보스일괄
 			command_list += ','.join(command[15]) + '\n'     #!q
-			command_list += ','.join(command[16]) + ' [할말]\n'     #!v
+			##command_list += ','.join(command[16]) + ' [할말]\n'     #!v
 			command_list += ','.join(command[17]) + '\n'     #!리젠
 			command_list += ','.join(command[18]) + '\n'     #!현재시간
 			command_list += ','.join(command[24]) + '\n'     #!킬초기화
@@ -1105,7 +1105,7 @@ while True:
 			command_list += ','.join(command[19]) + ' [공지내용]\n'     #!공지
 			command_list += ','.join(command[20]) + '\n'     #!공지삭제
 			command_list += ','.join(command[21]) + ' [할말]\n'     #!상태
-			command_list += ','.join(command[28]) + ' 사다리, 정산, 척살, 경주\n\n'     #!채널설정
+			##command_list += ','.join(command[28]) + ' 사다리, 정산, 척살, 경주\n\n'     #!채널설정
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
 			command_list += '[보스명]킬 또는 [보스명]킬 0000, 00:00\n'  
@@ -2175,7 +2175,7 @@ while True:
 						kill_Data.append(tmp_fk)
 						tmp_fk = []
 					embed = discord.Embed(
-							description= ':skull_crossbones:' + sayMessage + ' 따히! [' + str(abc) + '번]\n',
+							description= ':skull_crossbones:' + sayMessage + ' [' + str(abc) + '번]\n',
 							color=0xff00ff
 							)
 					await ctx.send(embed=embed, tts=False)
@@ -2186,7 +2186,7 @@ while True:
 
 				for i in range(len(kill_Data)):
 					if kill_Data[i][0] != '':
-						kill_output += ':skull_crossbones: ' + str(kill_Data[i][0]) + ' : ' + str(kill_Data[i][1]) + '번 따히!\n'
+						kill_output += ':skull_crossbones: ' + str(kill_Data[i][0]) + ' : ' + str(kill_Data[i][1]) + '번 !\n'
 
 				if kill_output != '' :
 					embed = discord.Embed(
@@ -2542,14 +2542,14 @@ while True:
 
 				for i in range(bossNum):
 					################ 보스 킬처리 ################ 
-					if message.content.startswith('!킬' + bossData[i][0]) or message.content.startswith('!킬' + convertToInitialLetters(bossData[i][0])) or message.content.startswith('!킬 ' + bossData[i][0]) or message.content.startswith(convertToInitialLetters('!킬 ' + bossData[i][0])):
+					if message.content.startswith('!킬'+ bossData[i][0]) or message.content.startswith(convertToInitialLetters('!킬'+bossData[i][0])) or message.content.startswith('!킬 '+bossData[i][0]) or message.content.startswith(convertToInitialLetters('!킬 '+bossData[i][0])):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'킬'
+						tmp_msg = '킬' + bossData[i][0]
 						if len(hello) > len(tmp_msg) + 3 :
 							if hello.find(':') != -1 :
 								chkpos = hello.find(':')
@@ -2598,14 +2598,14 @@ while True:
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith(bossData[i][0] +'멍'):
+					if message.content.startswith('!멍'+ bossData[i][0]):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = bossData[i][0] +'멍'
+						tmp_msg = '!멍'+bossData[i][0]
 						tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 
 						if len(hello) > len(tmp_msg) + 3 :
@@ -2758,4 +2758,4 @@ while True:
 
 	print("Bot restarting")
 	client = discord.Client(loop=client.loop)
-	client = commands.Bot(command_prefix="", help_command = None, description='iter디코봇')
+	client = commands.Bot(command_prefix="", help_command = None, description='일상디코봇')
