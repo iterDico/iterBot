@@ -46,6 +46,7 @@ LoadChk = 0
 
 bossTime = []
 tmp_bossTime = []
+bef_bossTime = []
 
 fixed_bossTime = []
 
@@ -1849,8 +1850,8 @@ while True:
 						aa.append('+')	                                 #output_bossData[3] : +
 					aa.append(bossData[i][2])                            #output_bossData[4] : 멍/미입력 보스
 					aa.append(bossMungCnt[i])	                         #output_bossData[5] : 멍/미입력횟수
-					aa.append(bossData[i][6])+'\n'                       #output_bossData[6] : 메세지
-					'---->'+ouput_bossData.append(aa)
+					aa.append(bossData[i][6])                            #output_bossData[6] : 메세지
+					ouput_bossData.append(aa)
 					aa = []
 
 			for i in range(fixed_bossNum):
@@ -1859,8 +1860,8 @@ while True:
 				aa.append(fixed_bossTime[i].strftime('%H:%M:%S'))    #output_bossData[2] : 시간(00:00:00) -> 초빼기 : aa.append(fixed_bossTime[i].strftime('%H:%M'))
 				aa.append('@')                                       #output_bossData[3] : @
 				aa.append(0)                                         #output_bossData[4] : 멍/미입력 보스
-				aa.append(0)+'\n'                                     #output_bossData[5] : 멍/미입력횟수
-				'---->'+aa.append("")                                        #output_bossData[6] : 메세지
+				aa.append(0)                                         #output_bossData[5] : 멍/미입력횟수
+				aa.append("")                                        #output_bossData[6] : 메세지
 				ouput_bossData.append(aa)
 				aa = []
 
@@ -1876,14 +1877,14 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + '```diff\n' +ouput_bossData[i][6] + '\n```'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (미 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (미 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + '```diff\n' +ouput_bossData[i][6] + '\n```'
 						else : 
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' ' + '```diff\n' +ouput_bossData[i][6] + '\n```'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' (멍 ' + str(ouput_bossData[i][5]) + '회)' + ' ' + '```diff\n' +ouput_bossData[i][6] + '\n```'
 
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
@@ -1902,11 +1903,11 @@ while True:
 						description= boss_information[0],
 						color=0x0000ff
 						)
-				embed.add_field(
-						name="----- 미예약 보스 -----",
-						value= tmp_boss_information[0],
-						inline = False
-						)				
+				#embed.add_field(
+				#		name="----- 미예약 보스 -----",
+				#		value= tmp_boss_information[0],
+				#		inline = False
+				#		)				
 				await ctx.send( embed=embed, tts=False)
 			else : 
 				###########################일반보스출력
@@ -1942,11 +1943,11 @@ while True:
 				else :
 					tmp_boss_information[0] = '``` ```'
 
-				embed = discord.Embed(
-					title = "----- 미예약 보스 -----",
-					description= tmp_boss_information[0],
-					color=0x0000ff
-					)
+				#embed = discord.Embed(
+				#	title = "----- 미예약 보스 -----",
+				#	description= tmp_boss_information[0],
+				#	color=0x0000ff
+				#	)
 				await ctx.send( embed=embed, tts=False)
 				for i in range(len(tmp_boss_information)-1):
 					if len(tmp_boss_information[i+1]) != 0:
@@ -2061,11 +2062,11 @@ while True:
 			else :
 				fixedboss_information[0] = '``` ```'
 	
-			embed = discord.Embed(
-					title = "----- 고 정 보 스 -----",
-					description= fixedboss_information[0],
-					color=0x0000ff
-					)
+			#embed = discord.Embed(
+			#		title = "----- 고 정 보 스 -----",
+			#		description= fixedboss_information[0],
+			#		color=0x0000ff
+			#		)
 			await ctx.send( embed=embed, tts=False)
 			for i in range(len(fixedboss_information)-1):
 				if len(fixedboss_information[i+1]) != 0:
@@ -2496,6 +2497,7 @@ while True:
 
 		global bossTime
 		global tmp_bossTime
+		global bef_bossTime
 
 		global fixed_bossTime
 
@@ -2586,7 +2588,8 @@ while True:
 							bossMungCnt[i] = bossMungCnt[i] - 1
 						else :
 							now2 = now2 + datetime.timedelta(hours = int(bossData[i][1]), minutes = int(bossData[i][5]))
-									
+
+						bef_bossTime[i] = tmp_now			
 						tmp_bossTime[i] = bossTime[i] = nextTime = now2
 						tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 						tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
@@ -2735,13 +2738,13 @@ while True:
 						
 						tmp_msg ='! 메모' + bossData[i][0] +' '
 
-						bossData[i][6] = hello[len(tmp_msg):]
-
 						embed = discord.Embed(
-							description= bossData[i][6] ,
+							description= "```" + fixed_bossData[i][0] + fixed_bossData[i][4] + "```" ,
 							color=0x00ff00
 						)
-						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + embed=embed, tts=False + ' ] 메모등록 완료>', tts=False)
+						
+						bossData[i][6] = hello[len(tmp_msg):]
+						await client.get_channel(channel).send('< ' + bossData[i][0] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
 						
 					if message.content.startswith('!메모삭제 '+ bossData[i][0]):
 						
