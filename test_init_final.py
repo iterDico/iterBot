@@ -705,12 +705,12 @@ async def dbSave():
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') +  ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
 						else : 
 							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
 					else:
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
 						else : 
 							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
 						
@@ -1119,10 +1119,10 @@ while True:
 					description= '```' + command_list + '```',
 					color=0xff00ff
 					)
-			embed.add_field(
-					name="----- 추가기능 -----",
-					value= '```- [보스명]킬/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]킬 명령어는 초성으로 입력가능합니다.\n ```'
-					)
+			#embed.add_field(
+			#		name="----- 추가기능 -----",
+			#		value= '```- [보스명]킬/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]킬 명령어는 초성으로 입력가능합니다.\n ```'
+			#		)
 			await ctx.send( embed=embed, tts=False)
 		else:
 			return
@@ -2542,7 +2542,7 @@ while True:
 
 				for i in range(bossNum):
 					################ 보스 킬처리 ################ 
-					if message.content.startswith('!킬'+ bossData[i][0]) or message.content.startswith('!'+convertToInitialLetters('킬'+bossData[i][0])) or message.content.startswith('!킬 '+bossData[i][0]) or message.content.startswith('!'+convertToInitialLetters('킬 '+bossData[i][0])):
+					if message.content.startswith('!킬'+ bossData[i][0]) or message.content.startswith('!'+convertToInitialLetters('킬'+bossData[i][0])) or message.content.startswith('!킬 '+bossData[i][0]) or message.content.startswith(convertToInitialLetters('킬 '+bossData[i][0])):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
