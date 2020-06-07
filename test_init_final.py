@@ -312,7 +312,7 @@ def init():
 		f.append(tmp_bossData[j][4][13:])         #bossData[4] : 젠 알림멘트
 		f.append(tmp_bossData[j][1][tmp_len+1:])  #bossData[5] : 분
 		f.append('')                              #bossData[6] : 메세지
-		f.append(tmp_bossData[j][5][20:])         #bossData[7] : 보스위치
+		f.append(tmp_bossData[j][5][13:])         #bossData[7] : 보스위치
 		bossData.append(f)
 		f = []
 		bossTime.append(datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0])))
