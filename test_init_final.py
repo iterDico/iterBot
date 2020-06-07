@@ -1873,14 +1873,14 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + ' \n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + ' \n <' + ouput_bossData[i][6] + '>\n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
 
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
