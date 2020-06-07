@@ -282,7 +282,7 @@ def init():
 	#basicSetting[6] = int('597781866681991198') #보이스채널ID
 	#basicSetting[7] = int('597782016607649829') #택스트채널ID
 	
-	bossNum = int(len(boss_inputData)/5)
+	bossNum = int(len(boss_inputData)/6)
 
 	fixed_bossNum = int(len(fixed_inputData)/6) 
 	
@@ -312,6 +312,7 @@ def init():
 		f.append(tmp_bossData[j][4][13:])         #bossData[4] : 젠 알림멘트
 		f.append(tmp_bossData[j][1][tmp_len+1:])  #bossData[5] : 분
 		f.append('')                              #bossData[6] : 메세지
+		f.append(tmp_bossData[j][5][20:])         #bossData[7] : 보스위치
 		bossData.append(f)
 		f = []
 		bossTime.append(datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0])))
@@ -704,15 +705,9 @@ async def dbSave():
 			if timestring == bossTime[i]:
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
-						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
-						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
+						information1 += ' - ' + bossData[i][0] +' / ' +bossData[i][7] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
 					else:
-						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
-						else : 
-							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
+						information1 += ' - ' + bossData[i][0] +' / ' +bossData[i][7] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
 						
 	try :
 		contents = repo.get_contents("my_bot.db")
@@ -2598,14 +2593,14 @@ while True:
 
 					################ 보스 멍 처리 ################ 
 
-					if message.content.startswith('!멍'+ bossData[i][0]):
+					if message.content.startswith('!멍 '+ bossData[i][0]):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						else:
 							bossData[i][6] = ''
 							
-						tmp_msg = '!멍'+bossData[i][0]
+						tmp_msg = '!멍 '+bossData[i][0]
 						tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
 
 						if len(hello) > len(tmp_msg) + 3 :
