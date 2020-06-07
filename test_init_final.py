@@ -287,7 +287,7 @@ def init():
 	fixed_bossNum = int(len(fixed_inputData)/6) 
 	
 	for i in range(bossNum):
-		tmp_bossData.append(boss_inputData[i*5:i*5+5])
+		tmp_bossData.append(boss_inputData[i*6:i*6+6])
 
 	for i in range(fixed_bossNum):
 		tmp_fixed_bossData.append(fixed_inputData[i*6:i*6+6]) 
