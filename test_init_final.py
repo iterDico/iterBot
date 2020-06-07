@@ -1119,10 +1119,10 @@ while True:
 					description= '```' + command_list + '```',
 					color=0xff00ff
 					)
-			#embed.add_field(
-			#		name="----- 추가기능 -----",
-			#		value= '```- [보스명]킬/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]킬 명령어는 초성으로 입력가능합니다.\n ```'
-			#		)
+			embed.add_field(
+					name="----- 추가기능 -----",
+					value= '```- [보스명]킬/멍/예상  [할말] : 보스시간 입력 후 빈칸 두번!! 메모 가능\n- [보스명]킬 명령어는 초성으로 입력가능합니다.\n ```'
+					)
 			await ctx.send( embed=embed, tts=False)
 		else:
 			return
