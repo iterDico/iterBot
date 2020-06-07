@@ -705,9 +705,9 @@ async def dbSave():
 			if timestring == bossTime[i]:
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
-						information1 += ' - ' + bossData[i][0] +' / ' +bossData[i][7] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
+						information1 += ' - ' + bossData[i][0] +' / ' +bossData[i][7] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' * ' + bossTimeString[i] + '\n<' + bossData[i][6] + '>' + '\n'
 					else:
-						information1 += ' - ' + bossData[i][0] +' / ' +bossData[i][7] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' * ' + '\n<' + bossData[i][6] + '>' + '\n'
+						information1 += ' - ' + bossData[i][0] +' / ' +bossData[i][7] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' * ' + bossTimeString[i] + '\n<' + bossData[i][6] + '>' + '\n'
 						
 	try :
 		contents = repo.get_contents("my_bot.db")
@@ -1873,14 +1873,14 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + bossTimeString[i] +'==='+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + ' \n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + bossTimeString[i] +'==='+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + ' \n <' + ouput_bossData[i][6] + '>\n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + bossTimeString[i] +'==='+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][1] + '--test >>'+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
+								boss_information[cnt] = boss_information[cnt] + bossTimeString[i] +'==='+ ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n <' + ouput_bossData[i][6] + '>\n'
 
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
