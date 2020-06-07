@@ -72,7 +72,7 @@ FixedBossDateData = []
 indexFixedBossname = []
 
 client = discord.Client()
-client = commands.Bot(command_prefix="", help_command = None, description='일상디코봇')
+client = commands.Bot(command_prefix="", help_command = None, description='iter디코봇')
 
 access_token = os.environ["BOT_TOKEN"]			
 git_access_token = os.environ["GIT_TOKEN"]			
@@ -2542,7 +2542,7 @@ while True:
 
 				for i in range(bossNum):
 					################ 보스 킬처리 ################ 
-					if message.content.startswith('!킬'+ bossData[i][0]) or message.content.startswith('!'+convertToInitialLetters('킬'+bossData[i][0])) or message.content.startswith('!킬 '+bossData[i][0]) or message.content.startswith('!'+convertToInitialLetters('킬 '+bossData[i][0])):
+					if message.content.startswith('!킬'+ bossData[i][0]) or '!' + message.content.startswith(convertToInitialLetters('킬'+bossData[i][0])) or message.content.startswith('!킬 '+bossData[i][0]) or '!'+ message.content.startswith(convertToInitialLetters('킬 '+bossData[i][0])):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
@@ -2758,4 +2758,4 @@ while True:
 
 	print("Bot restarting")
 	client = discord.Client(loop=client.loop)
-	client = commands.Bot(command_prefix="", help_command = None, description='일상디코봇')
+	client = commands.Bot(command_prefix="", help_command = None, description='iter디코봇')
