@@ -1864,6 +1864,12 @@ while True:
 			cnt = 0
 			boss_information.append('')
 
+			leftTime = ouput_bossData[i][1] - (datetime.datetime.now()  + datetime.timedelta(hours = int(basicSetting[0])))
+
+			total_seconds = int(leftTime.total_seconds())
+			hours, remainder = divmod(total_seconds,60*60)
+			minutes, seconds = divmod(remainder,60)
+
 			for timestring in sorted(datelist):
 				if len(boss_information[cnt]) > 1800 :
 					boss_information.append('')
@@ -1872,14 +1878,14 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + ' \n' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + ' \n' + ouput_bossData[i][6] + '\n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n ' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n ' + ouput_bossData[i][6] + '\n'
 
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
@@ -1895,7 +1901,7 @@ while True:
 
 				embed = discord.Embed(
 						title = "----- 보스탐 정보 -----",
-						description= boss_information[0],
+						description= boss_inf0ormation[0],
 						color=0x0000ff
 						)
 				#embed.add_field(
@@ -2035,6 +2041,12 @@ while True:
 			cnt = 0
 			boss_information.append('')
 
+			leftTime = ouput_bossData[i][1] - (datetime.datetime.now()  + datetime.timedelta(hours = int(basicSetting[0])))
+
+			total_seconds = int(leftTime.total_seconds())
+			hours, remainder = divmod(total_seconds,60*60)
+			minutes, seconds = divmod(remainder,60)
+
 			for timestring in sorted(datelist):
 				if len(boss_information[cnt]) > 1800 :
 					boss_information.append('')
@@ -2043,14 +2055,14 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
 							else :
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + ouput_bossData[i][2] + ' : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' ' + '%02d:%02d:%02d > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n' + ouput_bossData[i][6] + '\n'
 
 			###########################고정보스출력
 			if len(fixedboss_information[0]) != 0:
