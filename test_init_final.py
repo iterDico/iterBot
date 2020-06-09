@@ -1699,7 +1699,7 @@ while True:
 								hours, remainder = divmod(total_seconds,60*60)
 								minutes, seconds = divmod(remainder,60)
 
-								result_lefttime += '다음 ' + ouput_bossData[i][0] + ' / ' + bossData[i][7] + '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
+								result_lefttime += '다음 ' + ouput_bossData[i][0] + ' / ' + bossData[i][7] + ' 탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 				else :
 					for j in range(len(sorted_datelist)):
 						for i in range(len(ouput_bossData)):						
@@ -1710,7 +1710,7 @@ while True:
 								hours, remainder = divmod(total_seconds,60*60)
 								minutes, seconds = divmod(remainder,60)
 
-								result_lefttime += '다음 ' + ouput_bossData[i][0] + ' / ' + bossData[i][7] +  '탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
+								result_lefttime += '다음 ' + ouput_bossData[i][0] + ' / ' + bossData[i][7] +  ' 탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 				embed = discord.Embed(
 					description= result_lefttime,
 					color=0xff0000
@@ -2543,8 +2543,8 @@ while True:
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
-						else:
-							bossData[i][6] = ''
+						#else:
+							#bossData[i][6] = ''
 							
 						tmp_msg = '!킬' + bossData[i][0]
 						if len(hello) > len(tmp_msg) + 3 :
@@ -2599,8 +2599,8 @@ while True:
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
-						else:
-							bossData[i][6] = ''
+						#else:
+							#bossData[i][6] = ''
 							
 						tmp_msg = '!멍 '+bossData[i][0]
 						tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
@@ -2670,8 +2670,8 @@ while True:
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
-						else:
-							bossData[i][6] = ''
+						#else:
+							#bossData[i][6] = ''
 							
 						tmp_msg = '!예상 ' + bossData[i][0]
 						if len(hello) > len(tmp_msg) + 3 :
