@@ -1900,7 +1900,7 @@ while True:
 
 				embed = discord.Embed(
 						title = "----- 보스탐 정보 -----",
-						description= boss_inf0ormation[0],
+						description= boss_information[0],
 						color=0x0000ff
 						)
 				#embed.add_field(
