@@ -1870,7 +1870,7 @@ while True:
 					cnt += 1
 				for i in range(len(ouput_bossData)):
 					if timestring == ouput_bossData[i][1]:
-						leftTime = ouput_bossData[i][1] - (datetime.datetime.now()  + datetime.timedelta(hours = int(basicSetting[0])))
+						leftTime = ouput_bossData[i][2] - (datetime.datetime.now()  + datetime.timedelta(hours = int(basicSetting[0])))
 
 						total_seconds = int(leftTime.total_seconds())
 						hours, remainder = divmod(total_seconds,60*60)
@@ -2046,7 +2046,7 @@ while True:
 					cnt += 1
 				for i in range(len(ouput_bossData)):
 					if timestring == ouput_bossData[i][1]:
-						leftTime = ouput_bossData[i][1] - (datetime.datetime.now()  + datetime.timedelta(hours = int(basicSetting[0])))
+						leftTime = ouput_bossData[i][2] - (datetime.datetime.now()  + datetime.timedelta(hours = int(basicSetting[0])))
 
 						total_seconds = int(leftTime.total_seconds())
 						hours, remainder = divmod(total_seconds,60*60)
