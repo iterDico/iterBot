@@ -313,6 +313,7 @@ def init():
 		f.append(tmp_bossData[j][1][tmp_len+1:])  #bossData[5] : 분
 		f.append('')                              #bossData[6] : 메세지
 		f.append(tmp_bossData[j][5][13:])         #bossData[7] : 보스위치
+		f.append('')         					  #bossData[8] : 자리
 		bossData.append(f)
 		f = []
 		bossTime.append(datetime.datetime.now()+datetime.timedelta(days=365, hours = int(basicSetting[0])))
@@ -544,7 +545,7 @@ async def task():
 						if bossFlag0[i] == False:
 							bossFlag0[i] = True
 							if bossData[i][6] != '' :
-								await client.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
+								await client.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>' + '\n' + bossData[i][8] +  '```', tts=False)
 							else :
 								await client.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 							await PlaySound(voice_client1, './sound/' + bossData[i][0] + '알림1.mp3')
@@ -555,7 +556,7 @@ async def task():
 						if bossFlag[i] == False:
 							bossFlag[i] = True
 							if bossData[i][6] != '' :
-								await client.get_channel(channel).send("```" + bossData[i][0] + ' / ' + bossData[i][7] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
+								await client.get_channel(channel).send("```" + bossData[i][0] + ' / ' + bossData[i][7] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>' + '\n' + bossData[i][8] +  '```', tts=False)
 							else :
 								await client.get_channel(channel).send("```" + bossData[i][0] + ' / ' + bossData[i][7] +  ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 							await PlaySound(voice_client1, './sound/' + bossData[i][0] + '알림.mp3')
@@ -572,7 +573,7 @@ async def task():
 					bossTime[i] = now+datetime.timedelta(days=365)
 					if bossData[i][6] != '' :
 						embed = discord.Embed(
-								description= "```" + bossData[i][0] + ' / ' + bossData[i][7] +  bossData[i][4] + '\n<' + bossData[i][6] + '>```' ,
+								description= "```" + bossData[i][0] + ' / ' + bossData[i][7] +  bossData[i][4] + '\n<' + bossData[i][6] + '>' + '\n<' + bossData[i][8] + '>' + '```' ,
 								color=0x00ff00
 								)
 					else :
@@ -704,14 +705,14 @@ async def dbSave():
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8] + '\n'
 					else:
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8]+ '\n'
 					
 	try :
 		contents = repo.get_contents("my_bot.db")
@@ -1849,6 +1850,7 @@ while True:
 					aa.append(bossMungCnt[i])	                         #output_bossData[5] : 멍/미입력횟수
 					aa.append(bossData[i][6])                            #output_bossData[6] : 메세지
 					aa.append(bossData[i][7])                            #output_bossData[7] : 위치
+					aa.append(bossData[i][8])                            #output_bossData[8] : 자리
 					ouput_bossData.append(aa)
 					aa = []
 
@@ -1876,17 +1878,17 @@ while True:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
 								print("ABCDEF 보탐 여기일반?1!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' )\n'
 							else :
 								print("ABCDEF 보탐 여기일반?2!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
 								print("ABCDEF 보탐 여기일반?3!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
 							else :
 								print("ABCDEF 보탐 여기일반?4!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
 
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
@@ -2014,6 +2016,7 @@ while True:
 					aa.append(bossMungCnt[i])	                         #output_bossData[5] : 멍/미입력횟수
 					aa.append(bossData[i][6])	                         #output_bossData[6] : 메세지
 					aa.append(bossData[i][7])	                         #output_bossData[7] : 위치
+					aa.append(bossData[i][8])	                         #output_bossData[8] : 자리
 					ouput_bossData.append(aa)
 					aa = []
 
@@ -2051,17 +2054,17 @@ while True:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
 								print("ABCDEF 보탐 여기고정?1!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
 							else :
 								print("ABCDEF 보탐 여기고정?2!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
 								print("ABCDEF 보탐 여기고정?3!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
 							else :
 								print("ABCDEF 보탐 여기고정?4!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
 
 			###########################고정보스출력
 			if len(fixedboss_information[0]) != 0:
@@ -2741,7 +2744,7 @@ while True:
 
 					if message.content.startswith('!메모 ' + bossData[i][0] +' '):
 						
-						tmp_msg ='! 메모' + bossData[i][0] +' '
+						tmp_msg ='!메모 ' + bossData[i][0] +' '
 						
 						bossData[i][6] = hello[len(tmp_msg):]
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' / ' + bossData[i][7] + ' [ ' + bossData[i][6] + ' ] 메모등록 완료>', tts=False)
@@ -2750,6 +2753,20 @@ while True:
 						
 						bossData[i][6] = ''
 						await client.get_channel(channel).send('< ' + bossData[i][0] + ' / ' + bossData[i][7] + ' 메모삭제 완료>', tts=False)
+
+					################ 보스별 자리 ################ 
+
+					if message.content.startswith('!자리 ' + bossData[i][0] +' '):
+
+						tmp_msg ='!자리 ' + bossData[i][0] +' '
+						
+						bossData[i][8] = hello[len(tmp_msg):]
+						await client.get_channel(channel).send('< ' + bossData[i][0] + ' / ' + bossData[i][7] + ' [ ' + bossData[i][8] + ' ] 자리등록 완료>', tts=False)
+						
+					if message.content.startswith('!자리삭제 '+ bossData[i][0]):
+						
+						bossData[i][8] = ''
+						await client.get_channel(channel).send('< ' + bossData[i][0] + ' / ' + bossData[i][7] + ' 자리삭제 완료>', tts=False)
 
 		await client.process_commands(ori_msg)
 
