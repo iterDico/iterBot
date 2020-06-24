@@ -505,7 +505,7 @@ async def task():
 			################ 킬 목록 초기화 ################ 
 			if kill_Time.strftime('%Y-%m-%d ') + kill_Time.strftime('%H:%M') == now.strftime('%Y-%m-%d ') + now.strftime('%H:%M'):
 				kill_Time = kill_Time + datetime.timedelta(days=int(1))
-				#await initkill_list()
+				await initkill_list()
 
 			################ 고정 보스 확인 ################ 
 			for i in range(fixed_bossNum):
@@ -545,7 +545,7 @@ async def task():
 						if bossFlag0[i] == False:
 							bossFlag0[i] = True
 							if bossData[i][6] != '' :
-								await client.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>' + '\n' + bossData[i][8] +  '```', tts=False)
+								await client.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
 							else :
 								await client.get_channel(channel).send("```" + bossData[i][0] + ' ' + basicSetting[3] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 							await PlaySound(voice_client1, './sound/' + bossData[i][0] + '알림1.mp3')
@@ -556,9 +556,9 @@ async def task():
 						if bossFlag[i] == False:
 							bossFlag[i] = True
 							if bossData[i][6] != '' :
-								await client.get_channel(channel).send("```" + bossData[i][0] + ' / ' + bossData[i][7] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>' + '\n' + bossData[i][8] +  '```', tts=False)
+								await client.get_channel(channel).send("```" + bossData[i][0] + ' / ' + bossData[i][7] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]" + '\n<' + bossData[i][6] + '>```', tts=False)
 							else :
-								await client.get_channel(channel).send("```" + bossData[i][0] + ' / ' + bossData[i][7] +  ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
+								await client.get_channel(channel).send("```" + bossData[i][0] + ' / ' + bossData[i][7] + ' ' + basicSetting[1] + '분 전 ' + bossData[i][3] + " [" +  bossTimeString[i] + "]```", tts=False)
 							await PlaySound(voice_client1, './sound/' + bossData[i][0] + '알림.mp3')
 
 				################ 보스 젠 시간 확인 ################ 
@@ -573,12 +573,12 @@ async def task():
 					bossTime[i] = now+datetime.timedelta(days=365)
 					if bossData[i][6] != '' :
 						embed = discord.Embed(
-								description= "```" + bossData[i][0] + ' / ' + bossData[i][7] +  bossData[i][4] + '\n<' + bossData[i][6] + '>' + '\n<' + bossData[i][8] + '>' + '```' ,
+								description= "```" + bossData[i][0] + bossData[i][4] + '\n<' + bossData[i][6] + '>```' ,
 								color=0x00ff00
 								)
 					else :
 						embed = discord.Embed(
-								description= "```" + bossData[i][0] + ' / ' + bossData[i][7] +  bossData[i][4] + "```" ,
+								description= "```" + bossData[i][0] + bossData[i][4] + "```" ,
 								color=0x00ff00
 								)
 					await client.get_channel(channel).send(embed=embed, tts=False)
@@ -681,6 +681,7 @@ async def dbSave():
 	global bossDateString
 	global bossMungFlag
 	global bossMungCnt
+
 	for i in range(bossNum):
 		for j in range(bossNum):
 			if bossTimeString[i] and bossTimeString[j] != '99:99:99':
@@ -698,6 +699,7 @@ async def dbSave():
 	datelist1 = bossTime
 	
 	datelist = list(set(datelist1))
+
 	information1 = '----- 보스탐 정보 -----\n'
 	for timestring in sorted(datelist):
 		for i in range(bossNum):
@@ -705,15 +707,15 @@ async def dbSave():
 				if bossTimeString[i] != '99:99:99' or bossMungFlag[i] == True :
 					if bossMungFlag[i] == True :
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + tmp_bossTime[i].strftime('%H:%M:%S') + ' @ ' + tmp_bossTime[i].strftime('%Y-%m-%d') + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 					else:
 						if bossData[i][2] == '0' :
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8] + '\n'
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (미입력 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
 						else : 
-							information1 += ' - ' + bossData[i][0] +  ' / ' + bossData[i][7] +  '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + bossData[i][8]+ '\n'
-					
+							information1 += ' - ' + bossData[i][0] + '(' + bossData[i][1] + '.' + bossData[i][5] + ') : ' + bossTimeString[i] + ' @ ' + bossDateString[i] + ' (멍 ' + str(bossMungCnt[i]) + '회)' + ' * ' + bossData[i][6] + '\n'
+						
 	try :
 		contents = repo.get_contents("my_bot.db")
 		repo.update_file(contents.path, "bossDB", information1, contents.sha)
@@ -835,6 +837,7 @@ async def initkill_list():
 	global kill_Data
 	
 	kill_Data = []
+
 	try :
 		contents = repo.get_contents("kill_list.ini")
 		repo.update_file(contents.path, "kill list", '-----척살명단-----', contents.sha)
@@ -1087,13 +1090,13 @@ while True:
 			command_list += ','.join(command[8]) + '\n'     #!명치
 			command_list += ','.join(command[9]) + '\n'     #!재시작
 			command_list += ','.join(command[10]) + '\n'     #!미예약
-			##command_list += ','.join(command[11]) + ' [인원] [금액]\n'     #!분배
-			##command_list += ','.join(command[12]) + ' [뽑을인원수] [아이디1] [아이디2]...\n'     #!사다리
-			##command_list += ','.join(command[27]) + ' [아이디1] [아이디2]...(최대 12명)\n'     #!경주
-			##command_list += ','.join(command[13]) + ' [아이디]\n'     #!정산
+			#command_list += ','.join(command[11]) + ' [인원] [금액]\n'     #!분배
+			#command_list += ','.join(command[12]) + ' [뽑을인원수] [아이디1] [아이디2]...\n'     #!사다리
+			#command_list += ','.join(command[27]) + ' [아이디1] [아이디2]...(최대 12명)\n'     #!경주
+			#command_list += ','.join(command[13]) + ' [아이디]\n'     #!정산
 			command_list += ','.join(command[14]) + ' 또는 ' + ','.join(command[14]) + ' 0000, 00:00\n'     #!보스일괄
 			command_list += ','.join(command[15]) + '\n'     #!q
-			##command_list += ','.join(command[16]) + ' [할말]\n'     #!v
+			#command_list += ','.join(command[16]) + ' [할말]\n'     #!v
 			command_list += ','.join(command[17]) + '\n'     #!리젠
 			command_list += ','.join(command[18]) + '\n'     #!현재시간
 			command_list += ','.join(command[24]) + '\n'     #!킬초기화
@@ -1104,7 +1107,7 @@ while True:
 			command_list += ','.join(command[19]) + ' [공지내용]\n'     #!공지
 			command_list += ','.join(command[20]) + '\n'     #!공지삭제
 			command_list += ','.join(command[21]) + ' [할말]\n'     #!상태
-			##command_list += ','.join(command[28]) + ' 사다리, 정산, 척살, 경주\n\n'     #!채널설정
+			#command_list += ','.join(command[28]) + ' 사다리, 정산, 척살, 경주\n\n'     #!채널설정
 			command_list += ','.join(command[22]) + '\n'     #보스탐
 			command_list += ','.join(command[23]) + '\n'     #!보스탐
 			command_list += '!킬 [보스명] 또는 !킬 [보스명] 0000, 00:00\n'  
@@ -1113,6 +1116,7 @@ while True:
 			command_list += '!예상 [보스명] 또는 !예상 [보스명] 0000, 00:00\n' 
 			command_list += '!삭제 [보스명]\n'     
 			command_list += '!메모 [보스명] [할말]\n'
+			command_list += '!자 [보스명] [할말]\n'
 			embed = discord.Embed(
 					title = "----- 명령어 -----",
 					description= '```' + command_list + '```',
@@ -1630,7 +1634,7 @@ while True:
 					bossMungCnt[i] = bossMungCnt[i] - 1
 				else :
 					now2 = now2 + datetime.timedelta(hours = int(bossData[i][1]), minutes = int(bossData[i][5]))
-				
+							
 				tmp_bossTime[i] = bossTime[i] = nextTime = now2
 				tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 				tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
@@ -1714,7 +1718,7 @@ while True:
 								hours, remainder = divmod(total_seconds,60*60)
 								minutes, seconds = divmod(remainder,60)
 
-								result_lefttime += '다음 ' + ouput_bossData[i][0] + ' / ' + bossData[i][7] +  ' 탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
+								result_lefttime += '다음 ' + ouput_bossData[i][0] + ' / ' + bossData[i][7] + ' 탐까지 %02d:%02d:%02d 남았습니다. ' % (hours,minutes,seconds) + '[' +  ouput_bossData[i][2] + ']\n'
 				embed = discord.Embed(
 					description= result_lefttime,
 					color=0xff0000
@@ -1848,7 +1852,7 @@ while True:
 						aa.append('+')	                                 #output_bossData[3] : +
 					aa.append(bossData[i][2])                            #output_bossData[4] : 멍/미입력 보스
 					aa.append(bossMungCnt[i])	                         #output_bossData[5] : 멍/미입력횟수
-					aa.append(bossData[i][6])                            #output_bossData[6] : 메세지
+					aa.append(bossData[i][6])	                         #output_bossData[6] : 메세지
 					aa.append(bossData[i][7])                            #output_bossData[7] : 위치
 					aa.append(bossData[i][8])                            #output_bossData[8] : 자리
 					ouput_bossData.append(aa)
@@ -1877,19 +1881,14 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
-								print("ABCDEF 보탐 여기일반?1!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' )\n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 							else :
-								print("ABCDEF 보탐 여기일반?2!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
-								print("ABCDEF 보탐 여기일반?3!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 							else :
-								print("ABCDEF 보탐 여기일반?4!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
-
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' +  ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 			if len(boss_information) == 1 and len(tmp_boss_information) == 1:
 				###########################
 				if len(boss_information[0]) != 0:
@@ -2053,19 +2052,14 @@ while True:
 					if timestring == ouput_bossData[i][1]:
 						if ouput_bossData[i][4] == '0' :
 							if ouput_bossData[i][5] == 0 :
-								print("ABCDEF 보탐 여기고정?1!"  )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 							else :
-								print("ABCDEF 보탐 여기고정?2!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 						else : 
 							if ouput_bossData[i][5] == 0 :
-								print("ABCDEF 보탐 여기고정?3!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 							else :
-								print("ABCDEF 보탐 여기고정?4!" )
-								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ') \n'
-
+								boss_information[cnt] = boss_information[cnt] + ouput_bossData[i][3] + ' > [' + ouput_bossData[i][2] + '] : ' + ouput_bossData[i][0] + ' / ' + ouput_bossData[i][7] + '\n --->  ' + ouput_bossData[i][6] + '\n --->  ( ' + ouput_bossData[i][8] + ' ) \n'
 			###########################고정보스출력
 			if len(fixedboss_information[0]) != 0:
 				fixedboss_information[0] = "```diff\n" + fixedboss_information[0] + "\n```"
@@ -2552,13 +2546,13 @@ while True:
 				hello = message.content
 
 				for i in range(bossNum):
-					################ 보스 킬처리 ################ 
+					################ 보스 컷처리 ################ 
 					if message.content.startswith('!킬'+ bossData[i][0]) or message.content.startswith('!'+convertToInitialLetters('킬'+bossData[i][0])) or message.content.startswith('!킬 '+bossData[i][0]) or message.content.startswith('!'+convertToInitialLetters('킬 '+bossData[i][0])):
 						if hello.find('  ') != -1 :
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						#else:
-							#bossData[i][6] = ''
+						#	bossData[i][6] = ''
 							
 						tmp_msg = '!킬' + bossData[i][0]
 						if len(hello) > len(tmp_msg) + 3 :
@@ -2597,7 +2591,7 @@ while True:
 							bossMungCnt[i] = bossMungCnt[i] - 1
 						else :
 							now2 = now2 + datetime.timedelta(hours = int(bossData[i][1]), minutes = int(bossData[i][5]))
-
+									
 						tmp_bossTime[i] = bossTime[i] = nextTime = now2
 						tmp_bossTimeString[i] = bossTimeString[i] = nextTime.strftime('%H:%M:%S')
 						tmp_bossDateString[i] = bossDateString[i] = nextTime.strftime('%Y-%m-%d')
@@ -2614,7 +2608,7 @@ while True:
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						#else:
-							#bossData[i][6] = ''
+						#	bossData[i][6] = ''
 							
 						tmp_msg = '!멍 '+bossData[i][0]
 						tmp_now = datetime.datetime.now() + datetime.timedelta(hours = int(basicSetting[0]))
@@ -2685,7 +2679,7 @@ while True:
 							bossData[i][6] = hello[hello.find('  ')+2:]
 							hello = hello[:hello.find('  ')]
 						#else:
-							#bossData[i][6] = ''
+						#	bossData[i][6] = ''
 							
 						tmp_msg = '!예상 ' + bossData[i][0]
 						if len(hello) > len(tmp_msg) + 3 :
